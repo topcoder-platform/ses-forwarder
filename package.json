@@ -16,7 +16,8 @@
     "url": "https://github.com/topcoder-platform/ses-forwarder/issues"
   },
   "homepage": "https://github.com/topcoder-platform/ses-forwarder#readme",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "tc-core-library-js": "^2.4.1"
   }
 }

@@ -21,6 +21,11 @@ provider:
       Action:
         - ses:SendRawEmail
       Resource: '*'
+    - Effect: Allow
+      Action:
+        - "ssm:GetParameter"
+      Resource: 
+        - "arn:aws:ssm:${self:provider.region}:#{AWS::AccountId}:parameter/dev/sesforwarder/auth0_client_secret"
 
   stackTags:
     service: ${self:service}

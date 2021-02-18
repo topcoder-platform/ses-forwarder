@@ -1,0 +1,144 @@
+{
+  "Records": [{
+  "eventSource": "aws:ses",
+  "eventVersion": "1.0",
+  "ses": {
+  "mail": {
+    "timestamp": "2021-02-18T18:37:28.628Z",
+    "source": "jwheeler@topcoder.com",
+    "messageId": "5db7fhn7l30qsckj6vcegirk5j6odfoqpovqr4o1",
+    "destination": [
+      "beaker22@dev.wearetopcoder.com"
+    ],
+    "headersTruncated": false,
+    "headers": [
+      {
+        "name": "Return-Path",
+        "value": "<jwheeler@topcoder.com>"
+      },
+      {
+        "name": "Received",
+        "value": "from mail-qt1-f179.google.com (mail-qt1-f179.google.com [209.85.160.179]) by inbound-smtp.us-east-1.amazonaws.com with SMTP id 5db7fhn7l30qsckj6vcegirk5j6odfoqpovqr4o1 for beaker22@dev.wearetopcoder.com; Thu, 18 Feb 2021 18:37:28 +0000 (UTC)"
+      },
+      {
+        "name": "X-SES-Spam-Verdict",
+        "value": "PASS"
+      },
+      {
+        "name": "X-SES-Virus-Verdict",
+        "value": "PASS"
+      },
+      {
+        "name": "Received-SPF",
+        "value": "pass (spfCheck: domain of topcoder.com designates 209.85.160.179 as permitted sender) client-ip=209.85.160.179; envelope-from=jwheeler@topcoder.com; helo=mail-qt1-f179.google.com;"
+      },
+      {
+        "name": "Authentication-Results",
+        "value": "amazonses.com; spf=pass (spfCheck: domain of topcoder.com designates 209.85.160.179 as permitted sender) client-ip=209.85.160.179; envelope-from=jwheeler@topcoder.com; helo=mail-qt1-f179.google.com; dkim=pass header.i=@topcoder-com.20150623.gappssmtp.com; dmarc=none header.from=topcoder.com;"
+      },
+      {
+        "name": "X-SES-RECEIPT",
+        "value": "AEFBQUFBQUFBQUFGVmptakJmRTNrQ1R1dzBCM0VmaFdrQjY3RTh1cWdCY05iY1pBRndHbllXRDh1dzJjZm9NQ0NXVW1CS1pWUExWS2UvUkljZG9obXNPVWFVM2xLSEUyK0pXVUNSNGZoYmIrQkVtU3ZnbWIrbElqV041bEJzb043N3hmOGlFYko1UTVTUVRSaU90ajNzUlkzbmhDc3QrUkd2ZDJCMG01amlHcXBuZFIrblFoVDQxTGtBQlZpQUd5VlR0cHIvTXIxbXIxOHVSSEdxZ21VanJwOTFsYkFReEFXdkNhaXRhNEVPMWpNYm9xNWVzVllsVDJRUzJJU0hoWTRzV2RpZjl6Tk9wSVhYU0lhTnk1Qzl3TzBXcE5MV3FBWE5ndnJ2dWE0Rk9JYWw1STdPTnNHNnc9PQ=="
+      },
+      {
+        "name": "X-SES-DKIM-SIGNATURE",
+        "value": "a=rsa-sha256; q=dns/txt; b=KNjqEGPh0x2XEa6mt5TUYdn/2fkZbRpgNC8PA3KPoEU3tzMgZ1BmIU/MphZEbPGRnS6peUoGiU7SMzR5sUkehv2OkCpzFP/0RG3/YWbz52a39zDMpLCUdkdFMsDbT2/gg1ksI2aNe7wGnmFg7bfzfjv3PtuSXSk/mg31yQB3ZpA=; c=relaxed/simple; s=224i4yxa5dv7c2xz3womw6peuasteono; d=amazonses.com; t=1613673448; v=1; bh=uvzUxP45vD8NVp8q7XrjQoNxIcCPnjs/kp4/N61+MnU=; h=From:To:Cc:Bcc:Subject:Date:Message-ID:MIME-Version:Content-Type:X-SES-RECEIPT;"
+      },
+      {
+        "name": "Received",
+        "value": "by mail-qt1-f179.google.com with SMTP id o30so1785409qtd.12 for <beaker22@dev.wearetopcoder.com>; Thu, 18 Feb 2021 10:37:28 -0800 (PST)"
+      },
+      {
+        "name": "DKIM-Signature",
+        "value": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=topcoder-com.20150623.gappssmtp.com; s=20150623; h=mime-version:from:date:message-id:subject:to; bh=qJxqe4q4wK5ibkR7LpLFE4+G5ft9Y8fBOlLcNL9jIb4=; b=hhVN6UQ67wv0k+c4ofAkpMuZnMLAYhPgjP9rayf5kDwar2jjijDNRlp9jDXG5aRhymbgC5uCGsoB7wDEWf3bIxe6UwNcOgOWtm1F03Hu2pHgB2iI5N2eY/R0W0eTjMSAX2Ic09WknsxyafG4ZS+95iS0/WJpOdlWsdYnjiZwWhZ4ZmbuzMMWtqKGysRDvLtWVmwGdeh2JLlblCTsPSWLlZhlJ5rAf8F9uxZuXX/cUpVWgI4jwq31Io0uS+R0kJnPOqjujR1SRC62CoN6hPNe6CMDp+YNoNIuq7abdJHeLiirK5neReDINLN7mmQSIHfMn6MCEpxzDOC65Upg8pHMeA=="
+      },
+      {
+        "name": "X-Google-DKIM-Signature",
+        "value": "v=1; a=rsa-sha256; c=relaxed/relaxed; d=1e100.net; s=20161025; h=x-gm-message-state:mime-version:from:date:message-id:subject:to; bh=qJxqe4q4wK5ibkR7LpLFE4+G5ft9Y8fBOlLcNL9jIb4=; b=tld0wZgSZ5tioHFTvMKMZ2hkcE4o8klSrG8caAbdKaRAXWYYFADegPqCIlRNTg4v0J BL/gl7x9BRygSsqtcEJgW3wOkkBtcaL+x5iFeaEQUXewrhM14QMmdKTrSZjO6dzdIZG3 opzq7HFism+cLB3Nl9K4Q+62dK+kigigniJAQusLlnj/rhkRSp6R1l8vCks8GGukvFeg QtMK0pOnrsoMFqWGFBH0hM+kjpxrRRRTdeEVTtiowOK6DmHvDoKtdRZ3StdkRrbt6/9R vDeoGPH28ItKB50tN4wGSb3htzL8arrvLu3fuBUcR81ceQmfvbL61AoP9D6I2vgmvn0m Ez7g=="
+      },
+      {
+        "name": "X-Gm-Message-State",
+        "value": "AOAM530fgKAcLVp4il9DFGz3aGxnStF+9HTViu+/8raQQnSY+Bf2CFfc nqIlbysUGhqPHmwsrmD258WG4EP3nbGwi2SHk+MtDr9LdTGBow=="
+      },
+      {
+        "name": "X-Google-Smtp-Source",
+        "value": "ABdhPJyKnzGFyMJ0xD5lwr/F2kIB94WhiQX7nxVqJTsOQ1pEYsaw3N3smi9PoLetl0HCIjBvwiC3lc4w2rRM5KYd6Tw="
+      },
+      {
+        "name": "X-Received",
+        "value": "by 2002:ac8:44a3:: with SMTP id a3mr3782312qto.322.1613673447673; Thu, 18 Feb 2021 10:37:27 -0800 (PST)"
+      },
+      {
+        "name": "MIME-Version",
+        "value": "1.0"
+      },
+      {
+        "name": "From",
+        "value": "\"Wheeler, John\" <jwheeler@topcoder.com>"
+      },
+      {
+        "name": "Date",
+        "value": "Thu, 18 Feb 2021 12:36:51 -0600"
+      },
+      {
+        "name": "Message-ID",
+        "value": "<CABSGWXQGqvqZrizcOBOva_xZhALmbmjJbtKPuLyKYL8VBi5seQ@mail.gmail.com>"
+      },
+      {
+        "name": "Subject",
+        "value": "enabled SNS"
+      },
+      {
+        "name": "To",
+        "value": "beaker22@dev.wearetopcoder.com"
+      },
+      {
+        "name": "Content-Type",
+        "value": "multipart/alternative; boundary=\"000000000000a1ede805bba0a02a\""
+      }
+    ],
+    "commonHeaders": {
+      "returnPath": "jwheeler@topcoder.com",
+      "from": [
+        "\"Wheeler, John\" <jwheeler@topcoder.com>"
+      ],
+      "date": "Thu, 18 Feb 2021 12:36:51 -0600",
+      "to": [
+        "beaker22@dev.wearetopcoder.com"
+      ],
+      "messageId": "<CABSGWXQGqvqZrizcOBOva_xZhALmbmjJbtKPuLyKYL8VBi5seQ@mail.gmail.com>",
+      "subject": "enabled SNS"
+    }
+  },
+  "receipt": {
+    "timestamp": "2021-02-18T18:37:28.628Z",
+    "processingTimeMillis": 488,
+    "recipients": [
+      "beaker22@dev.wearetopcoder.com"
+    ],
+    "spamVerdict": {
+      "status": "PASS"
+    },
+    "virusVerdict": {
+      "status": "PASS"
+    },
+    "spfVerdict": {
+      "status": "PASS"
+    },
+    "dkimVerdict": {
+      "status": "GRAY"
+    },
+    "dmarcVerdict": {
+      "status": "GRAY"
+    },
+    "action": {
+      "type": "S3",
+      "topicArn": "arn:aws:sns:us-east-1:811668436784:dev-wearetopcoder-ses",
+      "bucketName": "aws-ses-forwarder-dev-assets",
+      "objectKeyPrefix": "smtp",
+      "objectKey": "smtp/5db7fhn7l30qsckj6vcegirk5j6odfoqpovqr4o1"
+    }
+  }
+  }
+  }]
+}

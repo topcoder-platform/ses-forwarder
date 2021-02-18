@@ -144,6 +144,7 @@ exports.parseEvent = function(data) {
     });
     return Promise.reject(new Error('Error: Received invalid SES message.'));
   }
+  console.log('Recieved a valid message. SES payload:'+data.event.Records[0].ses.receipt.recipients);
 
   data.email = data.event.Records[0].ses.mail;
   data.recipients = data.event.Records[0].ses.receipt.recipients;
