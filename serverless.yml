@@ -6,22 +6,44 @@ provider:
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
   stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+      - s3:GetObject
+      - s3:PutObject
+      Resource: 
+        Fn::Join:
+          - '' 
+          - - 'arn:aws:s3:::'
+            - Ref: S3Assets
+            - '/smtp/*'
+    - Effect: Allow
+      Action:
+        - ses:SendRawEmail
+      Resource: '*'
 
-stackTags:
-  service: ${self:service}
-  deployuser: ${opt:deployuser}
-  gitrepo: ${git:repository}
-  giturl: ${opt:giturl}
-  githash: ${git:sha1}
-  gitmessage: ${git:message}
-  gitbranch: ${git:branch}
+  stackTags:
+    service: ${self:service}
+    deployuser: ${opt:deployuser}
+    gitrepo: ${git:repository}
+    giturl: ${opt:giturl}
+    githash: ${git:sha1}
+    gitmessage: ${git:message}
+    gitbranch: ${git:branch}
 
 functions:
-  hello:
-    handler: handler.hello
+  forwarder:
+    handler: forwarder.handler
+
 
 resources:
   Resources:
+    LambdaInvokePermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName: !GetAtt ForwarderLambdaFunction.Arn
+        Action: lambda:InvokeFunction
+        Principal: ses.amazonaws.com 
     S3Assets:
       Type: AWS::S3::Bucket
       Properties:
@@ -52,8 +74,9 @@ resources:
       Type: AWS::SES::ReceiptRuleSet
       Properties:
         RuleSetName: ${self:service}-${self:provider.stage}-wearetopcoder
-    SESReceiptRule:
+    SESReceiptRule1:
       Type: AWS::SES::ReceiptRule
+      DependsOn: BucketPolicy 
       Properties:
         Rule:
           Actions:
@@ -61,9 +84,31 @@ resources:
                 BucketName: ${self:service}-${self:provider.stage}-assets 
                 ObjectKeyPrefix: smtp 
           Enabled: true
-          Name: save-to-s3-trigger-lambda
+          Name: save-to-s3
           Recipients:
-            - wearetopcoder.com
+            - dev.wearetopcoder.com
           ScanEnabled: true
           TlsPolicy: Require
         RuleSetName: ${self:service}-${self:provider.stage}-wearetopcoder
+    SESReceiptRule2:
+      Type: AWS::SES::ReceiptRule
+      Properties:
+        Rule:
+          Actions:
+            - LambdaAction:
+                FunctionArn: !GetAtt  ForwarderLambdaFunction.Arn
+                InvocationType: Event 
+          Enabled: true
+          Name: trigger-lambda
+          Recipients:
+            - dev.wearetopcoder.com
+          ScanEnabled: true
+          TlsPolicy: Require
+        RuleSetName: ${self:service}-${self:provider.stage}-wearetopcoder
+plugins:
+  - serverless-plugin-git-variables
+  - serverless-pseudo-parameters
+  - serverless-plugin-resource-tagging
+  - serverless-iam-roles-per-function
+#               FunctionArn: Fn::Join [':'[arn,aws,lambda,'','','function','${self:service}-${self:provider.stage}-functionB']]
+#             Function: !Sub arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${self:service}-${self:provider.stage}-wearetopcoder
