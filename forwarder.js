@@ -37,7 +37,7 @@ const getUserEmail = async (handle) => {
     const options = {
       hostname: 'api.topcoder-dev.com',
       port: 443,
-      path: '/v3/users?filter=email%3Djohnstephenwheeler@gmail.com',
+      path: '/v3/users?filter=handle%3D'+handle,
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -182,6 +182,10 @@ exports.transformRecipients = function(data) {
         origEmailDomain = origEmailKey.slice(pos);
         origEmailUser = origEmailKey.slice(0, pos);
       }
+      console.log('Get email domain as: '+origEmailDomain);
+      console.log('Get email domain as: '+origEmailUser);
+      var memberEmail = getUserEmail(origEmailUser);
+      console.log('Get value for member email: '+memberEmail);
       if (origEmailDomain &&
           data.config.forwardMapping.hasOwnProperty(origEmailDomain)) {
         newRecipients = newRecipients.concat(
