@@ -1,9 +1,9 @@
 "use strict";
 
-const https = require('https');
-const AWS = require('aws-sdk');
+const https = require('https')
+const AWS = require('aws-sdk')
 const m2mAuth = require('tc-core-library-js').auth.m2m
-const ssm = new AWS.SSM();
+const ssm = new AWS.SSM()
 
 const auth0cspromise = ssm.getParameter({
   Name: "/dev/sesforwarder/auth0_client_secret",
